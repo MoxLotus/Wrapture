@@ -4,9 +4,90 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wrapture"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Wrapture" Height="450" Width="800"
+        Background="Black"
+        Foreground="White"
+        >
 
-    </Grid>
+  <Window.Resources>
+    <Style TargetType="TextBox">
+      <Setter Property="Background" Value="#FF2D2D30"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="#FF3F3F46"/>
+      <Setter Property="CaretBrush" Value="White"/>
+    </Style>
+
+    <Style TargetType="Button">
+      <Setter Property="Background" Value="#FF3F3F46"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="BorderBrush" Value="#FF5A5A5A"/>
+      <Setter Property="Padding" Value="5,2"/>
+    </Style>
+
+    <Style TargetType="TextBlock">
+      <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style TargetType="xctk:IntegerUpDown">
+      <Setter Property="Background" Value="#FF3F3F46" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="xctk:DoubleUpDown">
+      <Setter Property="Background" Value="#FF3F3F46" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+  </Window.Resources>
+
+  <TabControl>
+    <TabItem Header="Home">
+      <StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <StackPanel>
+            <TextBlock Text="Source Folder:" Margin="10,10,0,5"/>
+            <StackPanel Orientation="Horizontal">
+              <TextBox x:Name="SourceFolderTextBox" Width="300" IsReadOnly="True" Margin="10,0,10,0"/>
+              <Button Content="Browse..." Click="BrowseSource_Click"/>
+            </StackPanel>
+          </StackPanel>
+
+          <StackPanel Orientation="Horizontal">
+            <StackPanel>
+              <TextBlock Text="Destination Folder:" Margin="10,10,0,5"/>
+              <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="DestinationFolderTextBox" Width="300" IsReadOnly="True" Margin="10,0,10,0"/>
+                <Button Content="Browse..." Click="BrowseDestination_Click"/>
+              </StackPanel>
+            </StackPanel>
+          </StackPanel>
+        </StackPanel>
+
+        <TextBlock Text="Files in Source Folder:" Margin="10,10,0,5"/>
+        <ListBox x:Name="SourceFilesListBox" Height="200"/>
+      </StackPanel>
+    </TabItem>
+    <TabItem Header="Encode">
+      <StackPanel>
+        <TextBox Text="Codec"/>
+        <ComboBox IsEditable="True" Width="100" HorizontalAlignment="Left" SelectedIndex="0">
+          <ComboBoxItem Content="libx265"/>
+          <ComboBoxItem Content="libx264"/>
+        </ComboBox>
+        <TextBlock Text="Preset"/>
+        <ComboBox IsEditable="True" Width="100" HorizontalAlignment="Left" SelectedIndex="3">
+          <ComboBoxItem Content="Faster"/>
+          <ComboBoxItem Content="Fast"/>
+          <ComboBoxItem Content="Medium"/>
+          <ComboBoxItem Content="Slow"/>
+          <ComboBoxItem Content="Slower"/>
+        </ComboBox>
+        <TextBlock Text="CRF"/>
+        <xctk:IntegerUpDown Value="21" Minimum="14" Maximum="28" Increment="1" Width="50"/>
+      </StackPanel>
+    </TabItem>
+  </TabControl>
 </Window>
